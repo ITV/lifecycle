@@ -2,18 +2,26 @@ Lifecycle
 =====
 
 A pattern for safe usage of resources.
-Supports monadic operations so use can be composed.
+Supports monadic operations so usage can be composed.
+
+It's similar to:
+
+* the [using statement](https://msdn.microsoft.com/en-GB/library/yh598w02.aspx) in C#
+* the [try-with-resources](https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html) statement introduced in Java JDK 7
+
+But also acts as a [Factory](https://en.wikipedia.org/wiki/Factory_(object-oriented_programming)) for instantiating initialized instances of a type.
+
+Lifecycle was born of frustration, aiming to help your codebase tidy up all used resources. It's a nice `try` / `finally` wrapper!
 
 A resource is anything that requires:
 
 * Some intialization operations
 * And/or some tear-down operations
 
-to be performed before/after use. Examples include: files, HTTP servers, HTTP clients, actor systems, network connections, ...
+to be performed between use. For example, a file:
 
-It's a nice `try` / `finally` wrapper!
-
-Lifecycle was born of frustration, aiming to help your codebase tidy up all used resources.
+* Must be opened before any read/write operations are performed
+* Any pending writes should be flushed, and the file handle returned to the OS after use
 
 (Contrived) Example
 =====
