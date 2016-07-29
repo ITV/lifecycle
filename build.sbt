@@ -10,3 +10,6 @@ scalaVersion := "2.11.8"
 
 scalacOptions ++= Seq("-feature", "-deprecation", "-Xfatal-warnings")
 
+tutSettings
+
+tutTargetDirectory := baseDirectory.value
