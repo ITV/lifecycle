@@ -94,8 +94,8 @@ Defining a `Lifecycle`
 Here's a `Lifecycle` that performs all the pleaseantries before/after using a `Person`.
 
 ```scala
-scala> import itv.lifecycle._
-import itv.lifecycle._
+scala> import com.itv.lifecycle._
+import com.itv.lifecycle._
 
 scala> def personInteraction(person: Person): Lifecycle[Person] =
      |     new VanillaLifecycle[Person] {
@@ -107,7 +107,7 @@ scala> def personInteraction(person: Person): Lifecycle[Person] =
      |         override def shutdown(instance: Person): Unit =
      |             person.goodbye()
      |     }
-personInteraction: (person: Person)itv.lifecycle.Lifecycle[Person]
+personInteraction: (person: Person)com.itv.lifecycle.Lifecycle[Person]
 ```
 
 `start` produces an initialized instance of a `Person`. `shutdown` should always be performed after using a `Person`: even if the interaction caused an exception to be thrown.
@@ -193,7 +193,7 @@ Said goodbye to Bob
 java.lang.IllegalStateException: I'm not going to repeat what Bob just said to me.
   at $anonfun$1.apply(<console>:24)
   at $anonfun$1.apply(<console>:19)
-  at itv.lifecycle.Lifecycle$.using(Lifecycle.scala:51)
+  at com.itv.lifecycle.Lifecycle$.using(Lifecycle.scala:51)
   at .judgeThenAnnounce(<console>:19)
   ... 746 elided
 ```
@@ -205,7 +205,7 @@ Said goodbye to Fred
 java.lang.IllegalStateException: I'm not going to repeat what Fred just said to me.
   at $anonfun$1.apply(<console>:24)
   at $anonfun$1.apply(<console>:19)
-  at itv.lifecycle.Lifecycle$.using(Lifecycle.scala:51)
+  at com.itv.lifecycle.Lifecycle$.using(Lifecycle.scala:51)
   at .judgeThenAnnounce(<console>:19)
   ... 758 elided
 ```
@@ -307,7 +307,7 @@ scala> val httpServerLifecycle: Lifecycle[HttpServer] =
      |         override def shutdown(instance: HttpServer) =
      |             instance.stop()
      |     }
-httpServerLifecycle: itv.lifecycle.Lifecycle[HttpServer] = $anon$1@1ee7896e
+httpServerLifecycle: com.itv.lifecycle.Lifecycle[HttpServer] = $anon$1@6cd81f3f
 ```
 
 `Lifecycle` has a method that will help with this: `runUntilJvmShutdown`.

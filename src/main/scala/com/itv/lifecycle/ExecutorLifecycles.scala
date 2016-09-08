@@ -1,4 +1,4 @@
-package itv.lifecycle
+package com.itv.lifecycle
 
 import java.util.concurrent.{ScheduledExecutorService, Executors, ExecutorService}
 

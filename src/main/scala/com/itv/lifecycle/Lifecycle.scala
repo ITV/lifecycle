@@ -1,4 +1,4 @@
-package itv.lifecycle
+package com.itv.lifecycle
 
 /** Trait for classes that provide services that require shutting down after use.
   *

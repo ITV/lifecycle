@@ -1,4 +1,4 @@
-package itv.lifecycle
+package com.itv.lifecycle
 
 import org.scalatest.FunSuite
 import org.scalatest.Matchers._

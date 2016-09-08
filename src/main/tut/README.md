@@ -79,7 +79,7 @@ Defining a `Lifecycle`
 Here's a `Lifecycle` that performs all the pleaseantries before/after using a `Person`.
 
 ```tut
-import itv.lifecycle._
+import com.itv.lifecycle._
 
 def personInteraction(person: Person): Lifecycle[Person] =
     new VanillaLifecycle[Person] {
