@@ -20,6 +20,8 @@ publishArtifact in Test := false
 
 pomIncludeRepository := { _ => false }
 
+releasePublishArtifactsAction := PgpKeys.publishSigned.value
+
 pomExtra := (
   <url>https://github.com/ITV/lifecycle</url>
   <licenses>
