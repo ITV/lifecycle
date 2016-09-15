@@ -23,6 +23,13 @@ to be performed between use. For example, a file:
 * Must be opened before any read/write operations are performed
 * Any pending writes should be flushed, and the file handle returned to the OS after use
 
+SBT settings
+=====
+Stable:
+```
+"com.itv" %% "lifecycle" % "0.3"
+```
+
 (Contrived) Example
 =====
 
@@ -34,17 +41,17 @@ After you're done using them, you should say goodbye - it'd be pretty rude not t
 ```scala
 scala> case class Person(name: String, private val secret: String) {
      |     private var readyToTellSecret = false
-     | 
+     |
      |     def hello(): Unit = {
      |         readyToTellSecret = true
      |         println("Said hello to " + name)
      |     }
-     | 
+     |
      |     def revealSecret(): String = {
      |         require(readyToTellSecret, s"it's rude to ask $name a secret before you've said hello")
      |         secret
      |     }
-     | 
+     |
      |     def goodbye(): Unit = {
      |         readyToTellSecret = false
      |         println("Said goodbye to " + name)
@@ -103,7 +110,7 @@ scala> def personInteraction(person: Person): Lifecycle[Person] =
      |             person.hello()
      |             person
      |         }
-     | 
+     |
      |         override def shutdown(instance: Person): Unit =
      |             person.goodbye()
      |     }
@@ -126,7 +133,7 @@ scala> def announceSecret(person: Person) = {
      |         println("Asking secret")
      |         greetedPerson.revealSecret()
      |     }
-     | 
+     |
      |     println(s"${person.name}'s secret is '$secret'")
      | }
 announceSecret: (person: Person)Unit
@@ -174,13 +181,13 @@ scala> def judgeThenAnnounce(person: Person) = {
      |     val secret: String = Lifecycle.using(personInteraction(person)) { greetedPerson =>
      |         println("Asking secret")
      |         val revealedSecret: String = greetedPerson.revealSecret()
-     | 
+     |
      |         if (revealedSecret contains "hate")
      |             throw new IllegalStateException(s"I'm not going to repeat what ${greetedPerson.name} just said to me.")
      |         else
      |             revealedSecret
      |     }
-     | 
+     |
      |     println(s"${person.name}'s secret is '$secret'")
      | }
 judgeThenAnnounce: (person: Person)Unit
@@ -233,7 +240,7 @@ scala> def areFriends(personA: Person, personB: Person): Boolean = {
      |         b <- personInteraction(personB)
      |     }
      |         yield (a.revealSecret(), b.revealSecret())
-     | 
+     |
      |     Lifecycle.using(interrogation) {
      |         case (secretA, secretB) =>
      |             secretA == secretB
@@ -293,7 +300,7 @@ scala> trait HttpServer {
      | }
 defined trait HttpServer
 
-scala> val httpServerLifecycle: Lifecycle[HttpServer] = 
+scala> val httpServerLifecycle: Lifecycle[HttpServer] =
      |     new VanillaLifecycle[HttpServer] {
      |         override def start: HttpServer = {
      |             val server: HttpServer = new HttpServer {}
