@@ -35,4 +35,23 @@ class FilesystemLifecyclesTest extends FunSuite {
     }
   }
 
+  test("should create a directory, and remove it afterwards") {
+    val directoryName = UUID.randomUUID().toString
+
+    def directoryShouldNotExist = new File("./" + directoryName).exists() shouldBe false
+
+    withClue("directory should not exist before lifecycle usage") {
+      directoryShouldNotExist
+    }
+
+    Lifecycle.using(CreateDirectoryLifecycle(Paths.get("."), directoryName)) { directory =>
+      withClue("directory should exist during lifecycle usage") {
+        directory.toFile.exists() shouldBe true
+      }
+    }
+
+    withClue("directory should not exist after lifecycle usage") {
+      directoryShouldNotExist
+    }
+  }
 }
