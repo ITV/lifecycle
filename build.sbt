@@ -5,6 +5,8 @@ name := "lifecycle"
 
 organization := "com.itv"
 
+lazy val core
+
 libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.1" % "test"
 
 scalaVersion := "2.11.8"
