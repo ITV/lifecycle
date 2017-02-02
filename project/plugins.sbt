@@ -1,7 +1,7 @@
 
 addSbtPlugin("org.tpolecat" % "tut-plugin" % "0.4.8")
 
-addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.3")
+addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.4")
 
 addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "1.1")
 
