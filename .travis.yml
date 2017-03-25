@@ -12,4 +12,5 @@ after_success:
       env | grep -v SONATYPE &&
       test "${TRAVIS_PULL_REQUEST}" = 'false' &&
       test "${TRAVIS_BRANCH}" = 'master' &&
+      git checkout master &&
       sbt 'set credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", System.getenv("SONATYPE_USER"), System.getenv("SONATYPE_PASS"))' "release with-defaults"
