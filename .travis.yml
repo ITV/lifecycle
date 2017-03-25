@@ -11,5 +11,6 @@ after_success:
   - >
       echo "TRAVIS_PULL_REQUEST = ${TRAVIS_PULL_REQUEST}" &&
       echo "git branch is ${GIT_BRANCH}" &&
+      env | grep -v SONATYPE &&
       test "${TRAVIS_PULL_REQUEST}" = 'false' &&
       sbt 'set credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", System.getenv("SONATYPE_USER"), System.getenv("SONATYPE_PASS"))' "release with-defaults"
