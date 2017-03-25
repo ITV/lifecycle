@@ -9,8 +9,6 @@ env:
   - secure: baNNqvoVu0ya7RuQiWQ5g1Zf5u12QyNC89bWpFz4a8go1pkCML3JdF192rALMFnvZMaVJ3FYNpL1pE1e3CY4x9w0z9zdXStVnHa2vPYgwVJyNPGX8NdHfBJsPQXH88DP9SjDXhjOqj3Ms2RcAkKSN+QPTIuHhfX2xiNwcmaK4+VZhlAxngu4Rzz4prjGWolJVPP09vO5QrqT5KJxdeV58eA7rCkRzS0OhSgbwRrq3Ow4Z1eA56q0djAo4VoTUGDBuW/TH8a6VLU0MHx04vIGdrUpAJVmwGTnjpPm5UsEb5upIyrNT3ZGp/a1S1IJzAlhEGq3hSHHBYNVPw1DU5L88LQZ6+IGGAn2fuAGhT4WfQnnBIlIvNmo+GWQ/TpuhhU88uzSyfZX78HZoe9pG+vJXqAJnhdZf7q6CEuUFSsXi19sC7Njn/lP3HW/H4msOAnLgiYVu1+UsvRmxdZCc+6KoAnpMKdbWYWAjesFeJ+AK7/G6l0IO4A3zUAgV8Hvx/OJNcf0gddarMcJf+I+UE2rM11XfM5x4OSmgNMm52bTkqnFtk7gt81R5vZ0pFH4ukzfspgSMrFClBsTvQlaZafw9Qf5x8rGOfu36cEJ4LiNFtH9k9JSgCnpvZ8El9L5xi/ZRbVjOHhU2W9Llm1VD6JFWDVjZ4XpXHq/7FbdbCnUlm4=
 after_success:
   - >
-      echo "TRAVIS_PULL_REQUEST = ${TRAVIS_PULL_REQUEST}" &&
-      echo "git branch is ${GIT_BRANCH}" &&
       env | grep -v SONATYPE &&
       test "${TRAVIS_PULL_REQUEST}" = 'false' &&
-      sbt 'set credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", System.getenv("SONATYPE_USER"), System.getenv("SONATYPE_PASS"))' "release with-defaults"
+      echo doing release
