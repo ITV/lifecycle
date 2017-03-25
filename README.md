@@ -1,5 +1,6 @@
 Lifecycle
 =====
+[![Build Status](https://travis-ci.org/ITV/lifecycle.svg?branch=master)](https://travis-ci.org/ITV/lifecycle)
 
 A pattern for safe usage of resources.
 Supports monadic operations so usage can be composed.
