@@ -62,6 +62,14 @@ publishTo := {
 	Some("releases"  at nexus + "service/local/staging/deploy/maven2")
 }
 
+pgpPublicRing := file("./ci/public.asc")
+
+pgpSecretRing := file("./ci/private.asc")
+
+pgpSigningKey := Some(-5373332187933973712L)
+
+pgpPassphrase := Option(System.getenv("GPG_KEY_PASSPHRASE")).map(_.toArray)
+
 releaseProcess := Seq[ReleaseStep](
   checkSnapshotDependencies,
   inquireVersions,
