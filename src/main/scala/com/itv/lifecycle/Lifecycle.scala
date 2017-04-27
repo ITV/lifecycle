@@ -54,6 +54,12 @@ object Lifecycle {
     }
   }
 
+  def sequence[T](lifecycles: List[Lifecycle[T]]): Lifecycle[List[T]] = {
+    lifecycles.foldLeft[Lifecycle[List[T]]](NoOpLifecycle(List()))((acc, lifecycle) => acc.flatMap[List[T]] { list =>
+      lifecycle.map(a => a :: list)
+    }).map(_.reverse)
+  }
+
 }
 
 class FlatMapLifecycle[A, B](a: Lifecycle[A], f: A => Lifecycle[B]) extends Lifecycle[B] {

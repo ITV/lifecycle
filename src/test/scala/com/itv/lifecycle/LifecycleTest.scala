@@ -78,6 +78,19 @@ class LifecycleTest extends FunSuite {
     ))
   }
 
+  test("Lifecycles can be sequenced") {
+    val lifecycles = List(
+      NoOpLifecycle(1),
+      NoOpLifecycle(2)
+    )
+
+    val resultLifecycle = Lifecycle.sequence(lifecycles)
+
+    Lifecycle.using(resultLifecycle) { list =>
+      list should be (List(1,2))
+    }
+  }
+
   sealed trait Event
   case class Started(name: String) extends Event
   case class Shutdown(name: String) extends Event
