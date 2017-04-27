@@ -17,6 +17,7 @@ after_success:
       git checkout master &&
       git config user.name "Martin Carolan (travis)" &&
       git config user.email "junk+travisbuild@mcarolan.net" &&
+      git status &&
       sbt 'set credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", System.getenv("SONATYPE_USER"), System.getenv("SONATYPE_PASS"))' "release with-defaults" &&
       git remote add origin-travis https://${GITHUB_TOKEN}@github.com/ITV/lifecycle.git > /dev/null 2>&1 &&
       git push --quiet --set-upstream origin-travis master
