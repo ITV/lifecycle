@@ -13,6 +13,7 @@ after_success:
   - >
       test "${TRAVIS_PULL_REQUEST}" = 'false' &&
       test "${TRAVIS_BRANCH}" = 'master' &&
+      echo $TRAVIS_COMMIT_MESSAGE | grep -i "perform_release" &&
       openssl aes-256-cbc -K $encrypted_580469430836_key -iv $encrypted_580469430836_iv -in ci/private.asc.enc -out ci/private.asc -d &&
       git checkout master &&
       git config user.name "Martin Carolan (travis)" &&
@@ -20,4 +21,4 @@ after_success:
       git status &&
       sbt 'set credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", System.getenv("SONATYPE_USER"), System.getenv("SONATYPE_PASS"))' "release with-defaults" &&
       git remote add origin-travis https://${GITHUB_TOKEN}@github.com/ITV/lifecycle.git > /dev/null 2>&1 &&
-      git push --quiet --set-upstream origin-travis master
+      git push --follow-tags
