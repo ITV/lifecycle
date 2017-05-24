@@ -23,7 +23,20 @@ publishArtifact in Test := false
 
 pomIncludeRepository := { _ => false }
 
+
+releaseCrossBuild := true
+
+releaseTagComment := s"Releasing ${(version in ThisBuild).value}"
+
+releaseCommitMessage := s"Setting version to ${(version in ThisBuild).value}"
+
 releasePublishArtifactsAction := PgpKeys.publishSigned.value
+
+// For Travis CI - see http://www.cakesolutions.net/teamblogs/publishing-artefacts-to-oss-sonatype-nexus-using-sbt-and-travis-ci
+credentials ++= (for {
+  username <- Option(System.getenv().get("SONATYPE_USERNAME"))
+  password <- Option(System.getenv().get("SONATYPE_PASSWORD"))
+} yield Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", username, password)).toSeq
 
 pomExtra := (
   <url>https://github.com/ITV/lifecycle</url>
@@ -75,13 +88,10 @@ releaseProcess := Seq[ReleaseStep](
   inquireVersions,
   runClean,
   runTest,
+  setReleaseVersion,
+  commitReleaseVersion,
   tagRelease,
-  ReleaseStep(action = Command.process("publishSigned", _), enableCrossBuild = true),
-  ReleaseStep(action = Command.process("sonatypeReleaseAll", _), enableCrossBuild = true)
+  setNextVersion,
+  commitNextVersion,
+  pushChanges
 )
-
-releaseCrossBuild := true
-
-releaseTagComment := s"Releasing ${(version in ThisBuild).value} [skip ci]"
-
-releaseCommitMessage := s"Setting version to ${(version in ThisBuild).value} [skip ci]"
