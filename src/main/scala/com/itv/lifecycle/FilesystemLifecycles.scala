@@ -28,7 +28,7 @@ object FilesystemLifecycles {
       new VanillaLifecycle[Path] {
         override def start(): Path = {
           val file = new File(rootPath.toFile, directoryName)
-          file.mkdir()
+          file.mkdirs()
           file.toPath
         }
 
