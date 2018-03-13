@@ -32,9 +32,7 @@ object FilesystemLifecycles {
           file.toPath
         }
 
-        override
-
-        def shutdown(instance: Path): Unit = {
+        override def shutdown(instance: Path): Unit = {
           Files.list(instance).forEach(new Consumer[Path] {
             override def accept(t: Path) =
               t.toFile.delete()
