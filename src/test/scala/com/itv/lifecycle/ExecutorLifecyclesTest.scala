@@ -1,14 +1,14 @@
 package com.itv.lifecycle
 
-import java.util.concurrent.TimeUnit
+import org.scalatest.funsuite.AnyFunSuite
 
-import org.scalatest.FunSuite
-import org.scalatest.Matchers._
+import java.util.concurrent.TimeUnit
+import org.scalatest.matchers.should.Matchers
 
 import scala.concurrent.duration.FiniteDuration
-import scala.concurrent.{Await, Promise, Future}
+import scala.concurrent.{Await, Future, Promise}
 
-class ExecutorLifecyclesTest extends FunSuite {
+class ExecutorLifecyclesTest extends AnyFunSuite with Matchers {
 
   test("Can provide ScheduledExecutor for running scheduled tasks") {
     var state = "A"

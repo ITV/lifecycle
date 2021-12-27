@@ -22,7 +22,7 @@ trait Lifecycle[+T] {
 
   def unwrap(instance: ServiceInstance): T
 
-  def shutdown(instance: ServiceInstance)
+  def shutdown(instance: ServiceInstance): Unit
 
   final def flatMap[U](f: T => Lifecycle[U]): Lifecycle[U] = new FlatMapLifecycle(this, f)
 
@@ -77,7 +77,7 @@ class FlatMapLifecycle[A, B](a: Lifecycle[A], f: A => Lifecycle[B]) extends Life
       val bi = b.start()
       new ServiceInstance {
 
-        def unwrap = b.unwrap(bi)
+        def unwrap: B = b.unwrap(bi)
 
         def shutdown(): Unit = {
           try {

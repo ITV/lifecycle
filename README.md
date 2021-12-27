@@ -40,25 +40,24 @@ They each have a secret, but they'll only reveal it to you if you say hello firs
 After you're done using them, you should say goodbye - it'd be pretty rude not to.
 
 ```scala
-scala> case class Person(name: String, private val secret: String) {
-     |     private var readyToTellSecret = false
-     |
-     |     def hello(): Unit = {
-     |         readyToTellSecret = true
-     |         println("Said hello to " + name)
-     |     }
-     |
-     |     def revealSecret(): String = {
-     |         require(readyToTellSecret, s"it's rude to ask $name a secret before you've said hello")
-     |         secret
-     |     }
-     |
-     |     def goodbye(): Unit = {
-     |         readyToTellSecret = false
-     |         println("Said goodbye to " + name)
-     |     }
-     | }
-defined class Person
+ case class Person(name: String, private val secret: String) {
+     private var readyToTellSecret = false
+
+     def hello(): Unit = {
+         readyToTellSecret = true
+         println("Said hello to " + name)
+     }
+
+     def revealSecret(): String = {
+         require(readyToTellSecret, s"it's rude to ask $name a secret before you've said hello")
+         secret
+     }
+
+     def goodbye(): Unit = {
+         readyToTellSecret = false
+         println("Said goodbye to " + name)
+     }
+ }
 ```
 
 ```scala
