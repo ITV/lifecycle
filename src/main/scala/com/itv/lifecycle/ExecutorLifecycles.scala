@@ -12,7 +12,7 @@ object ExecutorLifecycles {
 
   private def lifecycleFrom[T <: ExecutorService](createAndStart: => T) = new VanillaLifecycle[T] {
 
-    override def start() = createAndStart
+    override def start(): T = createAndStart
 
     override def shutdown(executorService: T): Unit = executorService.shutdown()
   }

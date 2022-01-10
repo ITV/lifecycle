@@ -1,17 +1,17 @@
 package com.itv.lifecycle
 
-import org.scalatest.FunSuite
-import org.scalatest.Matchers._
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers
 
-class LifecycleUsingTest extends FunSuite {
+class LifecycleUsingTest extends AnyFunSuite with Matchers {
 
   test("Service running when using Lifecycle.using pattern") {
     var srv: Service = null
     Lifecycle.using(ServiceLifecycle) {service =>
       srv = service
-      service should be('running)
+      service should be(Symbol("running"))
     }
-    srv shouldNot be('running)
+    srv shouldNot be(Symbol("running"))
   }
 
 }
@@ -30,7 +30,7 @@ object ServiceLifecycle extends VanillaLifecycle[Service] {
     service
   }
 
-  override def shutdown(instance: Service) {
+  override def shutdown(instance: Service): Unit = {
     instance.serviceStarted = false
   }
 }

@@ -5,17 +5,15 @@ name := "lifecycle"
 
 organization := "com.itv"
 
-libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.1" % "test"
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.10" % "test"
 
-scalaVersion := "2.12.1"
+scalaVersion := "2.13.6"
 
-crossScalaVersions := Seq("2.11.8", "2.12.1")
+crossScalaVersions := Seq("2.11.8", "2.12.1", "2.12.1")
 
 scalacOptions ++= Seq("-feature", "-deprecation", "-Xfatal-warnings")
 
-tutSettings
-
-tutTargetDirectory := baseDirectory.value
+mdocOut := baseDirectory.value
 
 publishMavenStyle := true
 
@@ -23,12 +21,11 @@ publishArtifact in Test := false
 
 pomIncludeRepository := { _ => false }
 
-
 releaseCrossBuild := true
 
-releaseTagComment := s"Releasing ${(version in ThisBuild).value}"
+releaseTagComment := s"Releasing ${(ThisBuild / version).value}"
 
-releaseCommitMessage := s"Setting version to ${(version in ThisBuild).value}"
+releaseCommitMessage := s"Setting version to ${(ThisBuild / version).value}"
 
 releasePublishArtifactsAction := PgpKeys.publishSigned.value
 
@@ -79,7 +76,7 @@ pgpPublicRing := file("./ci/public.asc")
 
 pgpSecretRing := file("./ci/private.asc")
 
-pgpSigningKey := Some(-5373332187933973712L)
+pgpSigningKey := Some("-5373332187933973712L")
 
 pgpPassphrase := Option(System.getenv("GPG_KEY_PASSPHRASE")).map(_.toArray)
 

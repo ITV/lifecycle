@@ -9,9 +9,9 @@ object FilesystemLifecycles {
   object CreateFileLifecycle {
     def apply(rootPath: Path, fileName: String, contents: String): Lifecycle[File] =
       new VanillaLifecycle[File] {
-        override def shutdown(instance: File) = instance.delete()
+        override def shutdown(instance: File): Unit = instance.delete()
 
-        override def start() = {
+        override def start(): File = {
           val file = new File(rootPath.toFile, fileName)
 
           file.createNewFile()
@@ -33,10 +33,7 @@ object FilesystemLifecycles {
         }
 
         override def shutdown(instance: Path): Unit = {
-          Files.list(instance).forEach(new Consumer[Path] {
-            override def accept(t: Path) =
-              t.toFile.delete()
-          })
+          Files.list(instance).forEach((t: Path) => t.toFile.delete())
           instance.toFile.delete()
         }
       }

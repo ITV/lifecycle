@@ -1,15 +1,14 @@
 package com.itv.lifecycle
 
 import java.io.File
-import java.nio.file.{Files, Paths}
+import java.nio.file.Paths
 import java.util.UUID
-
-import org.scalatest.FunSuite
-import org.scalatest.Matchers._
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers
 
 import scala.io.Source
 
-class FilesystemLifecyclesTest extends FunSuite {
+class FilesystemLifecyclesTest extends AnyFunSuite with Matchers {
 
   import FilesystemLifecycles._
 

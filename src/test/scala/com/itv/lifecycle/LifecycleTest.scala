@@ -1,11 +1,11 @@
 package com.itv.lifecycle
 
-import org.scalatest.FunSuite
-import org.scalatest.Matchers._
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers
 
 import scala.collection.mutable.ListBuffer
 
-class LifecycleTest extends FunSuite {
+class LifecycleTest extends AnyFunSuite with Matchers {
 
   test("Lifecycles can be reused") {
     val events = ListBuffer[Event]()
