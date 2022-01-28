@@ -11,7 +11,7 @@ scalaVersion := "2.13.6"
 
 crossScalaVersions := Seq("2.11.8", "2.12.1", "2.12.1")
 
-scalacOptions ++= Seq("-feature", "-deprecation", "-Xfatal-warnings")
+scalacOptions ++= Seq("-feature", "-deprecation")
 
 mdocOut := baseDirectory.value
 
