@@ -4,6 +4,8 @@ import java.io.{File, FileOutputStream}
 import java.nio.file.{Files, Path}
 import java.util.function.Consumer
 
+import scala.jdk.CollectionConverters._
+
 object FilesystemLifecycles {
 
   object CreateFileLifecycle {
@@ -33,7 +35,7 @@ object FilesystemLifecycles {
         }
 
         override def shutdown(instance: Path): Unit = {
-          Files.list(instance).forEach((t: Path) => t.toFile.delete())
+          Files.list(instance).iterator.asScala.foreach((t: Path) => t.toFile.delete())
           instance.toFile.delete()
         }
       }
