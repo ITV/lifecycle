@@ -10,6 +10,7 @@ lib_managed/
 src_managed/
 project/boot/
 project/plugins/project/
+project/project/
 lib/
 
 # Scala-IDE specific
@@ -30,3 +31,8 @@ lib/
 .ensime_cache
 *.iml
 *.bk
+
+.bloop
+.metals
+.vscode
+project/metals.sbt
